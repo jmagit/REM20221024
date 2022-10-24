@@ -3,6 +3,7 @@
 ## Documentación
 
 - https://docs.spring.io/spring-boot/docs/current/reference/html/
+- https://docs.spring.io/spring-data/commons/docs/current/reference/html/
 - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
 - https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/
 - https://docs.spring.io/spring-data/redis/docs/current/reference/html/
@@ -11,6 +12,12 @@
 - https://docs.spring.io/spring-cloud-commons/docs/current/reference/html/#spring-cloud-loadbalancer
 - https://docs.spring.io/spring-cloud-config/docs/current/reference/html/
 - https://docs.spring.io/spring-security/reference/index.html
+
+## Ejemplos
+
+- https://github.com/spring-projects/spring-data-examples
+- https://github.com/spring-projects/spring-data-rest-webmvc
+- https://github.com/spring-projects/spring-hateoas-examples
 
 ## Base de datos de ejemplos
 
