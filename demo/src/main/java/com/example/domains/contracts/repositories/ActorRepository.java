@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.domains.enties.Actor;
+import com.example.domains.enties.dtos.ActorShort;
 
 public interface ActorRepository extends JpaRepository<Actor, Integer>, JpaSpecificationExecutor<Actor> {
 	List<Actor> findTop10ByFirstNameStartingWithOrderByLastNameDesc(String prefijo);
@@ -20,5 +21,7 @@ public interface ActorRepository extends JpaRepository<Actor, Integer>, JpaSpeci
 	@Query(value = "SELECT * FROM actor a WHERE a.actor_id = :id", nativeQuery = true)
 	List<Actor> dameNuevosSQL(@Param("id") int id);
 	
+	List<ActorShort> readBy();
 	
+	<T> List<T> findAllBy(Class<T> tipo);
 }
