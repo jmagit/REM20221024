@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.example.domains.enties.dtos.ActorShort;
 import com.example.domains.entities.Actor;
+import com.example.domains.entities.dtos.ActorShort;
 
 public interface ActorRepository extends JpaRepository<Actor, Integer>, JpaSpecificationExecutor<Actor> {
 	List<Actor> findTop10ByFirstNameStartingWithOrderByLastNameDesc(String prefijo);

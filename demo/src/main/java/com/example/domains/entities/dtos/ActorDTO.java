@@ -1,4 +1,4 @@
-package com.example.domains.enties.dtos;
+package com.example.domains.entities.dtos;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
