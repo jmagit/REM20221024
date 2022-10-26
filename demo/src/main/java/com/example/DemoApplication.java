@@ -69,8 +69,9 @@ public class DemoApplication implements CommandLineRunner {
 //		System.out.println(ActorDTO.from(new ActorDTO(111, "de", "fuera")));
 //		dao.findAllBy(ActorDTO.class).forEach(System.out::println);
 //		dao.findAllBy(ActorShort.class).forEach(f-> System.out.println(f.getId() + " " + f.getNombre()));
-		srv.getAll().forEach(System.out::println);
-		srv.modify(new Actor(0, null, "kkkk"));
+//		srv.getAll().forEach(System.out::println);
+//		srv.modify(new Actor(0, null, "kkkk"));
+		System.out.println("Servicio arrancado");
 	}
 
 }
