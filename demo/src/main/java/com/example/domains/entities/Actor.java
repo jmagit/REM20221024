@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 
 import com.example.domains.core.entities.EntityBase;
 import com.example.domains.core.validations.NIF;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -49,6 +50,7 @@ public class Actor extends EntityBase<Actor> implements Serializable {
 
 	//bi-directional many-to-one association to FilmActor
 	@OneToMany(mappedBy="actor", fetch = FetchType.LAZY)
+	@JsonBackReference
 	private @Valid List<FilmActor> filmActors;
 
 	public Actor() {

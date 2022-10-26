@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Sort;
 
 import com.example.domains.contracts.repositories.ActorRepository;
+import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.dtos.ActorDTO;
 import com.example.domains.entities.dtos.ActorShort;
@@ -20,8 +21,11 @@ public class DemoApplication implements CommandLineRunner {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
+//	@Autowired
+//	ActorRepository dao;
+
 	@Autowired
-	ActorRepository dao;
+	ActorService srv;
 	
 	@Override
 	@Transactional
@@ -63,8 +67,10 @@ public class DemoApplication implements CommandLineRunner {
 //		dao.readBy().forEach(f-> System.out.println(f.getId() + " " + f.getNombre()));
 //		dao.findAll().forEach(f -> System.out.println(ActorDTO.from(f)));
 //		System.out.println(ActorDTO.from(new ActorDTO(111, "de", "fuera")));
-		dao.findAllBy(ActorDTO.class).forEach(System.out::println);
+//		dao.findAllBy(ActorDTO.class).forEach(System.out::println);
 //		dao.findAllBy(ActorShort.class).forEach(f-> System.out.println(f.getId() + " " + f.getNombre()));
+		srv.getAll().forEach(System.out::println);
+		srv.modify(new Actor(0, null, "kkkk"));
 	}
 
 }
