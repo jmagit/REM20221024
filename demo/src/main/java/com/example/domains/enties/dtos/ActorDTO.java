@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.example.domains.enties.Actor;
+import com.example.domains.entities.Actor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

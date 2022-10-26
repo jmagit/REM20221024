@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Sort;
 
 import com.example.domains.contracts.repositories.ActorRepository;
-import com.example.domains.enties.Actor;
 import com.example.domains.enties.dtos.ActorDTO;
 import com.example.domains.enties.dtos.ActorShort;
+import com.example.domains.entities.Actor;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
