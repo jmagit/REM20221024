@@ -97,7 +97,7 @@ public class ContactosApplication implements CommandLineRunner {
 //		System.out.println("Borrado");
 //		encontrado = dao.findById(id);
 //		System.out.println(encontrado.isPresent() ? encontrado.get() : "No encontrado");
-//		dao.findByConflictivoTrue().forEach(System.out::println);
+		dao.findByConflictivoTrue().forEach(System.out::println);
 	}
 
 }
