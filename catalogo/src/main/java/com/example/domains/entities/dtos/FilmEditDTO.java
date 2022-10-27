@@ -18,6 +18,7 @@ import com.example.domains.entities.FilmCategory;
 import com.example.domains.entities.Language;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 import lombok.AllArgsConstructor;
@@ -57,6 +58,7 @@ public class FilmEditDTO {
 	@Schema(description = "La lista de identificadores de actores que participan en la película")
 	private List<Integer> actors = new ArrayList<Integer>();
 	@Schema(description = "La lista de identificadores de categorías asignadas a la película")
+	@ArraySchema(uniqueItems = true, minItems = 1, maxItems = 3)
 	private List<Integer> categories = new ArrayList<Integer>();
 
 	public Film update(Film target) {

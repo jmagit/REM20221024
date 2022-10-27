@@ -33,7 +33,7 @@ public class Category implements Serializable {
 	private Timestamp lastUpdate;
 
 	@Column(nullable=false, length=25)
-	@JsonProperty("cotegoria")
+	@JsonProperty("categoria")
 	private String name;
 
 	//bi-directional many-to-one association to FilmCategory
