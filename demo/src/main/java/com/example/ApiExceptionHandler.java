@@ -13,6 +13,8 @@ import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
+import feign.FeignException;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 
@@ -44,7 +46,7 @@ public class ApiExceptionHandler {
 		}
 	}
 
-	@ExceptionHandler({ NotFoundException.class, EmptyResultDataAccessException.class })
+	@ExceptionHandler({ NotFoundException.class, EmptyResultDataAccessException.class, FeignException.NotFound.class })
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ErrorMessage notFoundRequest(Exception exception) {
 		return new ErrorMessage("Not found",

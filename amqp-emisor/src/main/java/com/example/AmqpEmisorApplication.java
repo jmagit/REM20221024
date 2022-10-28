@@ -24,16 +24,7 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 
-@OpenAPIDefinition(
-        info = @Info(
-                title = "Microservicio: AMQP Emisor",
-                version = "1.0",
-                description = "Monta diferentes escenacios para las pruebas de concepto de Microservicio.",
-                license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0.html"),
-                contact = @Contact(name = "Javier Martín", url = "https://github.com/jmagit", email = "support@example.com")
-        ),
-        externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/REM20220725")
-)
+@OpenAPIDefinition(info = @Info(title = "Microservicio: AMQP Emisor", version = "1.0", description = "Monta diferentes escenacios para las pruebas de concepto de Microservicio.", license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0.html"), contact = @Contact(name = "Javier Martín", url = "https://github.com/jmagit", email = "support@example.com")), externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/REM20220725"))
 @EnableEurekaClient
 @SpringBootApplication
 public class AmqpEmisorApplication {
@@ -43,32 +34,34 @@ public class AmqpEmisorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AmqpEmisorApplication.class, args);
 	}
-	
+
+	@Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+		return builder.build();
+	}
+
+	@Bean
+	public Queue saludosQueue() {
+		return new Queue("demo.saludos");
+	}
+
 	@Bean
 	public MessageConverter jsonConverter() {
 		return new Jackson2JsonMessageConverter();
 	}
-	@Bean 
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
-	
-    @Bean
-    public Queue saludosQueue() {
-        return new Queue("demo.saludos");
-    }
-    
-    @Bean
-    public ApplicationRunner runner(AmqpTemplate template) {
-        return args -> template.convertAndSend("demo.saludos", new MessageDTO("Hola mundo", origen));
-    }
 
-    @Bean
-    public DirectExchange exchange() {
-        return new DirectExchange("demo.rpc");
-    }
-    @Bean
-    public AsyncRabbitTemplate getAsyncRabbitTemplate(RabbitTemplate template) {
-    	return new AsyncRabbitTemplate(template);
-    }
+	@Bean
+	public ApplicationRunner runner(AmqpTemplate template) {
+		return args -> template.convertAndSend("demo.saludos", new MessageDTO("Hola mundo", origen));
+	}
+
+	@Bean
+	public DirectExchange exchange() {
+		return new DirectExchange("demo.rpc");
+	}
+
+	@Bean
+	public AsyncRabbitTemplate getAsyncRabbitTemplate(RabbitTemplate template) {
+		return new AsyncRabbitTemplate(template);
+	}
 }

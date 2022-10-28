@@ -32,12 +32,12 @@ public class EmisorResource {
 		return "SEND: " + msg;
 	}
 	
-	@GetMapping(path = "/respuestas")
+	@GetMapping(path = "/x-rpc/respuestas")
 	public List<MessageDTO> respuestas() {
         return respuestas;
 	}
 	
-	@GetMapping(path = "/solicita/{nombre}")
+	@GetMapping(path = "/x-rpc/solicita/{nombre}")
 	public String solicita(@PathVariable String nombre) {
 		String msg = "Hola " + nombre + " (con respuesta)";
 		new Thread(() -> respuestas.add((MessageDTO) amqp.convertSendAndReceive(exchange.getName(), "solicitud", new MessageDTO(msg, origen)))).run();
@@ -47,11 +47,14 @@ public class EmisorResource {
 	@Autowired
 	private AsyncRabbitTemplate amqpAsync;
 	
-	@GetMapping(path = "/solicita-async/{nombre}")
+	@GetMapping(path = "/x-rpc/solicita-async/{nombre}")
 	public String solicitaAsync(@PathVariable String nombre) {
 		String msg = "Hola " + nombre + " (con respuesta)";
 		amqpAsync.convertSendAndReceive(exchange.getName(), "solicitud", new MessageDTO(msg, origen))
-			.addCallback(result -> respuestas.add((MessageDTO) result), ex -> System.out.println(ex.getMessage()));
+			.addCallback(
+					result -> respuestas.add((MessageDTO) result), 
+					ex -> System.out.println(ex.getMessage())
+					);
         return "SEND: " + msg + " (esperando respuesta)";
 	}
 	
