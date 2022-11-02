@@ -37,10 +37,14 @@ public class EmisorResource {
         return respuestas;
 	}
 	
+	private void procesaRespuesta(Object response) {
+		System.err.println("Respuesta recibida: " + response);
+		respuestas.add((MessageDTO) response);
+	}
 	@GetMapping(path = "/x-rpc/solicita/{nombre}")
 	public String solicita(@PathVariable String nombre) {
 		String msg = "Hola " + nombre + " (con respuesta)";
-		new Thread(() -> respuestas.add((MessageDTO) amqp.convertSendAndReceive(exchange.getName(), "solicitud", new MessageDTO(msg, origen)))).run();
+		new Thread(() -> procesaRespuesta(amqp.convertSendAndReceive(exchange.getName(), "solicitud", new MessageDTO(msg, origen)))).run();
         return "SEND: " + msg + " (esperando respuesta)";
 	}
 	
@@ -52,7 +56,7 @@ public class EmisorResource {
 		String msg = "Hola " + nombre + " (con respuesta)";
 		amqpAsync.convertSendAndReceive(exchange.getName(), "solicitud", new MessageDTO(msg, origen))
 			.addCallback(
-					result -> respuestas.add((MessageDTO) result), 
+					result -> procesaRespuesta(result), 
 					ex -> System.out.println(ex.getMessage())
 					);
         return "SEND: " + msg + " (esperando respuesta)";

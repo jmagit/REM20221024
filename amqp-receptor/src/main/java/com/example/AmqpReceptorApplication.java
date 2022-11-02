@@ -78,6 +78,6 @@ public class AmqpReceptorApplication {
 		LOGGER.warning("SOLICITUD RECIBIDA: " + in);
 		Thread.sleep(in.getMsg().length() * 1000);
 		LOGGER.warning("RESPONDIENDO:" + new Date(System.currentTimeMillis()));
-		return new MessageDTO(in.toString(), origen);
+		return new MessageDTO("Respuesta a: " + in.toString(), origen);
 	}
 }
